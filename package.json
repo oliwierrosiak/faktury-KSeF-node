@@ -13,10 +13,14 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@peculiar/webcrypto": "^1.5.0",
     "axios": "^1.13.6",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
-    "xmlbuilder2": "^4.0.3"
+    "xadesjs": "^2.6.5",
+    "xml-crypto": "^6.1.2",
+    "xmlbuilder2": "^4.0.3",
+    "xmldom": "^0.6.0"
   },
   "devDependencies": {
     "cross-env": "^10.1.0"

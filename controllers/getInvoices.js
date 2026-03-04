@@ -1,21 +1,6 @@
 import axios from 'axios'
-import { create } from 'xmlbuilder2'
-
-function generateXML(challenge)
-{
-    const xmlObj = {
-        AuthTokenRequest:{
-            "@xmlns":'http://ksef.mf.gov.pl/AuthTokenRequest',
-            ChallengeValue: challenge,
-            ContextIdentifier:{
-                Type:'NIP',
-                Identifier:process.env.NIP
-            }
-        }
-    }
-
-    return create(xmlObj).end({ prettyPrint:true})
-}
+import sign from '../helpers/sign.js'
+import generateXML from '../helpers/generateXML.js'
 
 async function getInvoices(req,res)
 {
@@ -25,7 +10,8 @@ async function getInvoices(req,res)
         const challenge= response.data.challenge
         if(!challenge) throw new Error()
         const xmlDoc = generateXML(challenge)
-        console.log(xmlDoc)
+        const signedXML = await sign(xmlDoc)
+        console.log(signedXML)
     }
     catch(ex)
     {
