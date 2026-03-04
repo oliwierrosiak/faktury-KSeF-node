@@ -6,16 +6,21 @@ async function getInvoices(req,res)
 {
     try
     {
-        const response = await axios.post(`${process.env.KSEF}/auth/challenge`)
-        const challenge= response.data.challenge
+        const response = await axios.post(`${process.env.KSEF}/auth/challenge`,{
+        contextIdentifier: {
+            type: "onip",
+            identifier: process.env.NIP
+        }
+        })
+        const challenge = response.data.challenge
         if(!challenge) throw new Error()
         const xmlDoc = generateXML(challenge)
         const signedXML = await sign(xmlDoc)
-        console.log(signedXML)
+        const auth = await axios.post(`${process.env.KSEF}/auth/xades-signature`,signedXML,{headers:{"Content-Type":'application/xml',"Accept": "application/json"}})
     }
     catch(ex)
     {
-        console.log(ex)
+        console.log(JSON.stringify(ex.response.data, null, 2));
     }
     res.sendStatus(200)
 }

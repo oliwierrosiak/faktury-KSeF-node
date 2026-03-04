@@ -57,13 +57,8 @@ async function sign(xmlString)
         }
     );
 
-    const signatureElement = signedXml.GetXml();
-    xmlDoc.documentElement.appendChild(signatureElement);
-
-    const serializer = new XMLSerializer();
-    const resultString = serializer.serializeToString(xmlDoc)
-
-    return resultString
+    const resultString = new XMLSerializer().serializeToString(signedXml.GetXml());
+    return resultString;
 }
 
 export default sign

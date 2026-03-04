@@ -4,16 +4,16 @@ function generateXML(challenge)
 {
     const xmlObj = {
         AuthTokenRequest:{
-            "@xmlns":'http://ksef.mf.gov.pl/AuthTokenRequest',
+            "@xmlns":"http://ksef.mf.gov.pl/auth/token/2.0",
             ChallengeValue: challenge,
             ContextIdentifier:{
-                Type:'NIP',
+                Type:'onip',
                 Identifier:process.env.NIP
             }
         }
     }
 
-    return create(xmlObj).end({ prettyPrint:true})  
+    return create(xmlObj).end()
 }
 
 export default generateXML
