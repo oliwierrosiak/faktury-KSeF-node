@@ -15,8 +15,10 @@
   "dependencies": {
     "@peculiar/webcrypto": "^1.5.0",
     "axios": "^1.13.6",
+    "cors": "^2.8.6",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
+    "mongoose": "^9.2.4",
     "xadesjs": "^2.6.5",
     "xml-crypto": "^6.1.2",
     "xmlbuilder2": "^4.0.3",

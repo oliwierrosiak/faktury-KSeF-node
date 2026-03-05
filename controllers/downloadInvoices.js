@@ -2,7 +2,7 @@ import axios from 'axios'
 import sign from '../helpers/sign.js'
 import generateXML from '../helpers/generateXML.js'
 
-async function getInvoices(req,res)
+async function downloadInvoices(req,res)
 {
     try
     {
@@ -25,4 +25,4 @@ async function getInvoices(req,res)
     res.sendStatus(200)
 }
 
-export default getInvoices
+export default downloadInvoices

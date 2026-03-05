@@ -1,8 +1,11 @@
 import { Router } from "express";
-import getInvoices from "../controllers/getInvoices.js";
+import downloadInvoices from "../controllers/downloadInvoices.js";
+import getAllInvoices from "../controllers/getAllInvoices.js";
 
 const router = new Router()
 
-router.get('/',getInvoices)
+router.get('/downloadInvoices',downloadInvoices)
+
+router.get('/getAllInvoices',getAllInvoices)
 
 export default router
