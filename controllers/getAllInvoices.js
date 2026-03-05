@@ -1,7 +1,16 @@
-function getAllInvoices(req,res)
+import { Invoices } from '../db/dbConfig.js'
+
+async function getAllInvoices(req,res)
 {
-    console.log("jest")
-    res.sendStatus(200)
+    try
+    {
+        const invoices = await Invoices.find({},'ksefNumber Fa.NumerFaktury Fa.Waluta Fa.DataWystawienia Podsumowanie.Brutto').sort({'Fa.DataWystawienia':1})
+        res.status(200).json(invoices)
+    }
+    catch(ex)
+    {
+        res.sendStatus(404)
+    }
 }
 
 export default getAllInvoices
