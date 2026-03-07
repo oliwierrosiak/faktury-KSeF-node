@@ -4,7 +4,7 @@ async function getAllInvoices(req,res)
 {
     try
     {
-        const invoices = await Invoices.find({},'ksefNumber Fa.NumerFaktury Fa.Waluta Fa.DataWystawienia Podsumowanie.Brutto').sort({'Fa.DataWystawienia':1})
+        const invoices = await Invoices.find({},'ksefNumber Fa.NumerFaktury Fa.Waluta Fa.DataWystawienia Podsumowanie.Brutto action').sort({'Fa.DataWystawienia':1})
         res.status(200).json(invoices)
     }
     catch(ex)
