@@ -16,7 +16,14 @@ async function downloadInvoices(req,res)
         if(!challenge) throw new Error()
         const xmlDoc = generateXML(challenge)
         const signedXML = await sign(xmlDoc)
-        const auth = await axios.post(`${process.env.KSEF}/auth/xades-signature`,signedXML,{headers:{"Content-Type":'application/xml',"Accept": "application/json"}})
+        const xmlBuffer = Buffer.from(signedXML, 'utf-8');
+        const auth = await axios.post(`${process.env.KSEF}/auth/xades-signature`,xmlBuffer,{params:{
+            verifyCertificateChain: false
+        },headers: {
+            'Content-Type': 'application/xml; charset=utf-8',
+            'Accept': 'application/json'
+        }})
+        console.log(auth)
     }
     catch(ex)
     {
