@@ -12,6 +12,7 @@ setNodeDependencies({
 const crypto = new Crypto();
 Application.setEngine("NodeJS", crypto);
 
+
 async function sign(xmlString) {
     const certPem = fs.readFileSync(process.env.XML_CERTIFICATE_PATH, "utf-8")
     .replace(/-----BEGIN CERTIFICATE-----|-----END CERTIFICATE-----|\s+/g, "");
@@ -33,6 +34,9 @@ async function sign(xmlString) {
 
     signedXml.CanonicalizationMethod = "http://www.w3.org/2001/10/xml-exc-c14n#"
 
+    const signatureId = "id-" + Math.random().toString(36).substr(2, 9);
+    const xadesId = "id-" + Math.random().toString(36).substr(2, 9);
+
     await signedXml.Sign(
         { name: "RSASSA-PKCS1-v1_5" },
         key,
@@ -43,11 +47,15 @@ async function sign(xmlString) {
                     hash: "SHA-256",
                     transforms: ["enveloped", "exc-c14n"],
                     uri: "",
-                },
+                }, 
             ],
-            id:'Signature',
+            id:signatureId,
             signingCertificate: certPem,
             x509: [certPem],
+            qualifyingProperties: {
+                id: xadesId,
+                target: `#${signatureId}`
+            }
         }
     );
 
