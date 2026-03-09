@@ -7,7 +7,7 @@ async function getAllInvoices(req,res)
         let invoices, startDate, endDate;
         if(req.query.date == 'all')
         {
-            invoices = await Invoices.find({},'ksefNumber Fa.NumerFaktury Fa.Waluta Fa.DataWystawienia Podsumowanie.Brutto action').skip(req.query.skip*10).limit(10).sort({'Fa.DataWystawienia':-1})
+            invoices = await Invoices.find({},'ksefNumber Fa.NumerFaktury Fa.Waluta Fa.DataWystawienia Podsumowanie.Brutto action').skip(req.query.skip*process.env.INVOICES_PER_PAGE).limit(process.env.INVOICES_PER_PAGE).sort({'Fa.DataWystawienia':-1})
         }
         else
         {
@@ -15,7 +15,8 @@ async function getAllInvoices(req,res)
             const endDateArray = req.query.date.split('-')
             startDate = `${startDateArray[0]}-${startDateArray[1].length === 1?`0${startDateArray[1]}`:startDateArray[1]}-${startDateArray[2]}`
             endDate = `${endDateArray[0]}-${+endDateArray[1]+1 > 9?+endDateArray[1]+1:`0${+endDateArray[1]+1}`}-${endDateArray[2]}`
-            invoices = await Invoices.find({'Fa.DataWystawienia':{$gte:startDate,$lt:endDate}})
+
+            invoices = await Invoices.find({'Fa.DataWystawienia':{$gte:startDate,$lt:endDate}},'ksefNumber Fa.NumerFaktury Fa.Waluta Fa.DataWystawienia Podsumowanie.Brutto action').skip(req.query.skip*process.env.INVOICES_PER_PAGE).limit(process.env.INVOICES_PER_PAGE).sort({'Fa.DataWystawienia':-1})
         }
 
         if(!invoices.length) throw new Error()
