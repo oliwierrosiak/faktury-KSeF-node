@@ -7,7 +7,7 @@ const router = new Router()
 
 router.get('/downloadInvoices',downloadInvoices)
 
-router.get('/getAllInvoices',getInvoices)
+router.get('/getInvoices',getInvoices)
 
 router.post('/invoiceActionUpdate',invoiceActionUpdate)
 
