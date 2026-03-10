@@ -17,6 +17,8 @@ async function downloadInvoices(req,res)
         const xmlDoc = generateXML(challenge)
         const signedXML = await sign(xmlDoc)
         const xmlBuffer = Buffer.from(signedXML, 'utf-8');
+        console.log(signedXML)
+        // return
         const auth = await axios.post(`${process.env.KSEF}/auth/xades-signature`,xmlBuffer,{params:{
             verifyCertificateChain: false
         },headers: {
@@ -27,7 +29,8 @@ async function downloadInvoices(req,res)
     }
     catch(ex)
     {
-        console.log(JSON.stringify(ex.response.data, null, 2));
+        console.log(ex)
+        // console.log(JSON.stringify(ex.response.data, null, 2));
     }
     res.sendStatus(200)
 }

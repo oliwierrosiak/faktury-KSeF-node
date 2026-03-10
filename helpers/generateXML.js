@@ -4,8 +4,9 @@ function generateXML(challenge)
 {
     const xmlObj = {
         AuthTokenRequest:{
-            "@xmlns": "http://ksef.mf.gov.pl/auth/token/2.0",
-            "@xmlns:ns3":"http://ksef.mf.gov.pl/schema/gtw/svc/types/2021/10/01/0001",
+            "@xmlns:xsi":"http://www.w3.org/2001/XMLSchema-instance",
+            "@xmlns:xsd":"http://www.w3.org/2001/XMLSchema",
+            "@xmlns":"http://ksef.mf.gov.pl/auth/token/2.0",
             Challenge: challenge,
             ContextIdentifier:{
                 Nip:process.env.NIP

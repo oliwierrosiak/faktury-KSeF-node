@@ -1,6 +1,6 @@
 import { Invoices } from '../db/dbConfig.js'
 
-async function getAllInvoices(req,res)
+async function getInvoices(req,res)
 {
     try
     {
@@ -46,4 +46,4 @@ async function getAllInvoices(req,res)
     }
 }
 
-export default getAllInvoices
+export default getInvoices

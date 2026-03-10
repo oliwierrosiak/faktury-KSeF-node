@@ -21,24 +21,34 @@ async function sign(xmlString) {
     .replace(/-----BEGIN PRIVATE KEY-----|-----END PRIVATE KEY-----|\s+/g, "");
 
     const xmlDoc = new DOMParser().parseFromString(xmlString, "application/xml");
-    
+
+    console.log(keyPem)
+
     const key = await crypto.subtle.importKey(
         "pkcs8",
         Buffer.from(keyPem, "base64"),
-        { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" },
+        { 
+            name: "ECDSA", 
+            namedCurve:"P-256"
+        },
         false,
         ["sign"]
     );
 
     const signedXml = new SignedXml();
 
+
     signedXml.CanonicalizationMethod = "http://www.w3.org/2001/10/xml-exc-c14n#"
 
     const signatureId = "id-" + Math.random().toString(36).substr(2, 9);
     const xadesId = "id-" + Math.random().toString(36).substr(2, 9);
 
+
     await signedXml.Sign(
-        { name: "RSASSA-PKCS1-v1_5" },
+        {
+            name: "ECDSA",
+            hash:"SHA-256"
+        },
         key,
         xmlDoc,
         {
