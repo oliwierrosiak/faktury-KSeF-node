@@ -4,7 +4,7 @@ async function search(req,res)
 {
     try
     {
-        const list = await Invoices.find({},'Fa.NumerFaktury Fa.DataSprzedazy').limit(10)
+        const list = await Invoices.find({},'Fa.NumerFaktury Fa.DataWystawienia').limit(10)
         res.status(200).json(list)
     }
     catch(ex)
