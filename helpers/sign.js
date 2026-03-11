@@ -22,8 +22,6 @@ async function sign(xmlString) {
 
     const xmlDoc = new DOMParser().parseFromString(xmlString, "application/xml");
 
-    console.log(keyPem)
-
     const key = await crypto.subtle.importKey(
         "pkcs8",
         Buffer.from(keyPem, "base64"),
