@@ -5,7 +5,15 @@ const InvoicesModel = mongoose.Schema({
     action:{
         type:String,
         default:null
-    }
+    },
+    invoiceNumber:String,
+    seller:Object,
+    buyer:Object,
+    netAmount:Number,
+    grossAmount:Number,
+    vatAmount:Number,
+    currency:String,
+    invoiceType:String
 })
 
 export default InvoicesModel
