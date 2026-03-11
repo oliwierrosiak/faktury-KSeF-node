@@ -7,7 +7,7 @@ async function getInvoices(req,res)
         let invoices, startDate, endDate;
         if(req.query.date == 'all')
         {
-            invoices = await Invoices.find({},'ksefNumber Fa.NumerFaktury Fa.Waluta Fa.DataWystawienia Podsumowanie.Brutto action').sort({'Fa.DataWystawienia':-1})
+            invoices = await Invoices.find({},'ksefNumber invoiceNumber currency issueDate grossAmount action').sort({'issueDate':-1})
         }
         else
         {
@@ -16,7 +16,7 @@ async function getInvoices(req,res)
             startDate = `${startDateArray[0]}-${startDateArray[1].length === 1?`0${startDateArray[1]}`:startDateArray[1]}-${startDateArray[2]}`
             endDate = `${endDateArray[0]}-${+endDateArray[1]+1 > 9?+endDateArray[1]+1:`0${+endDateArray[1]+1}`}-${endDateArray[2]}`
 
-            invoices = await Invoices.find({'Fa.DataWystawienia':{$gte:startDate,$lt:endDate}},'ksefNumber Fa.NumerFaktury Fa.Waluta Fa.DataWystawienia Podsumowanie.Brutto action').sort({'Fa.DataWystawienia':-1})
+            invoices = await Invoices.find({'issueDate':{$gte:startDate,$lt:endDate}},'ksefNumber invoiceNumber currency issueDate grossAmount action').sort({'issueDate':-1})
         }
 
         if(!invoices.length) throw new Error()

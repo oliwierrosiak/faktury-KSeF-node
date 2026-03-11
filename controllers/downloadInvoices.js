@@ -22,7 +22,7 @@ async function downloadInvoices(req,res)
     }
     catch(ex)
     {
-        console.log(ex)
+        console.log(ex.response.data)
         res.sendStatus(500)
     }
    
