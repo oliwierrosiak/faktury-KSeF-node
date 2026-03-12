@@ -1,4 +1,13 @@
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
+
+const invoiceFieldSchema = mongoose.Schema({
+    name:String,
+    brutto:Number,
+    comment:{
+        type:String,
+        default:''
+    }
+})
 
 const InvoicesModel = mongoose.Schema({
     ksefNumber:String,
@@ -14,7 +23,7 @@ const InvoicesModel = mongoose.Schema({
     vatAmount:Number,
     currency:String,
     invoiceType:String,
-    invoiceFields:Array
+    invoiceFields:[invoiceFieldSchema]
 })
 
 export default InvoicesModel
