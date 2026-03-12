@@ -28,6 +28,8 @@ async function ksefAuth()
             'Accept': 'application/json'
         }})
         const token = authorization.data.authenticationToken.token
+        console.log(signedXML)
+        console.log(token)
         return token
     }
     catch(ex)

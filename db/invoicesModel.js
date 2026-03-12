@@ -13,7 +13,8 @@ const InvoicesModel = mongoose.Schema({
     grossAmount:Number,
     vatAmount:Number,
     currency:String,
-    invoiceType:String
+    invoiceType:String,
+    invoiceFields:Array
 })
 
 export default InvoicesModel
