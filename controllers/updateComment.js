@@ -9,12 +9,13 @@ async function updateComment(req,res)
         const field = invoice.invoiceFields.id(req.body.id)
         field.comment = req.body.content
         await invoice.save()
+        res.sendStatus(200)
     }
     catch(ex)
     {
-        console.log(ex)
+        res.sendStatus(500)
     }
-    res.sendStatus(200)
+    
 }
 
 export default updateComment

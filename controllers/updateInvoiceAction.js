@@ -1,6 +1,6 @@
 import { Invoices } from "../db/dbConfig.js"
 
-async function invoiceActionUpdate(req,res)
+async function updateInvoiceAction(req,res)
 {
     try
     {
@@ -15,4 +15,4 @@ async function invoiceActionUpdate(req,res)
     }
 }
 
-export default invoiceActionUpdate
+export default updateInvoiceAction
