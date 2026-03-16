@@ -1,6 +1,7 @@
 import axios from 'axios'
 import ksefAuth from '../helpers/ksefAuth.js'
 import awaitUntilAuthBeDone from '../helpers/awaitUntilAuthBeDone.js'
+import getKsefTokens from '../helpers/getKsefTokens.js'
 
 async function downloadInvoices(req,res)
 {
@@ -12,13 +13,12 @@ async function downloadInvoices(req,res)
 
         const auth = await awaitUntilAuthBeDone(number,token)
 
-        console.log(auth)
         if(auth === false)
         {
             throw new Error()
         }
 
-       console.log('uweirzytelninono')
+        const accessToken = await getKsefTokens(token) 
 
 
         res.sendStatus(200)
