@@ -6,12 +6,7 @@ async function ksefAuth()
 {
     try
     {
-        const response = await axios.post(`${process.env.KSEF}/auth/challenge`,{
-            contextIdentifier: {
-                type: "onip",
-                identifier: process.env.NIP
-            }
-        })
+        const response = await axios.post(`${process.env.KSEF}/auth/challenge`)
 
         const challenge = response.data.challenge
 
@@ -20,17 +15,14 @@ async function ksefAuth()
         const xmlDoc = generateXML(challenge)
         const signedXML = await sign(xmlDoc)
         const xmlBuffer = Buffer.from(signedXML, 'utf-8');
-
         const authorization = await axios.post(`${process.env.KSEF}/auth/xades-signature`,xmlBuffer,{params:{
             verifyCertificateChain: false
         },headers: {
             'Content-Type': 'application/xml; charset=utf-8',
             'Accept': 'application/json'
         }})
-        const token = authorization.data.authenticationToken.token
-        console.log(signedXML)
-        console.log(token)
-        return token
+        const auth = {token:authorization.data.authenticationToken.token,number:authorization.data.referenceNumber}
+        return auth
     }
     catch(ex)
     {
