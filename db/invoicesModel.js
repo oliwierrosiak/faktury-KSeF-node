@@ -6,6 +6,10 @@ const invoiceFieldSchema = mongoose.Schema({
     comment:{
         type:String,
         default:''
+    },
+    action:{
+        type:String,
+        default:null
     }
 })
 
