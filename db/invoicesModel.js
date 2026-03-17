@@ -14,7 +14,11 @@ const invoiceFieldSchema = mongoose.Schema({
 })
 
 const InvoicesModel = mongoose.Schema({
-    ksefNumber:String,
+    ksefNumber:{
+        type:String,
+        unique: true,
+        required:true
+    },
     action:{
         type:String,
         default:null

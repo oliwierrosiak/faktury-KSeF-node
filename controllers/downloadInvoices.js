@@ -2,8 +2,9 @@ import axios from 'axios'
 import ksefAuth from '../helpers/ksefAuth.js'
 import awaitUntilAuthBeDone from '../helpers/awaitUntilAuthBeDone.js'
 import getKsefTokens from '../helpers/getKsefTokens.js'
-import getInvoiceData from '../helpers/getInvoiceData.js'
 import { Invoices } from '../db/dbConfig.js'
+import dateFilterSetter from '../helpers/dateFilterSetter.js'
+import insertNewInvoices from '../helpers/insertNewInvoices.js'
 
 async function downloadInvoices(req,res)
 {
@@ -20,9 +21,11 @@ async function downloadInvoices(req,res)
 
         const accessToken = await getKsefTokens(token) 
 
-        const startDate = new Date()
-        startDate.setMonth(startDate.getMonth() - 3)
-        startDate.setDate(startDate.getDate()+1)
+        const lastInvoice = await Invoices.find({}).sort({issueDate:-1}).limit(1).select('issueDate')
+        
+        const startDate = dateFilterSetter(lastInvoice[0])   
+
+        console.log(startDate)
 
         const invoicesMeta = await axios.post(`${process.env.KSEF}/invoices/query/metadata?pageSize=250`,{
             subjectType:'Subject2',
@@ -50,14 +53,15 @@ async function downloadInvoices(req,res)
                 invoiceType:x.invoiceType,
             }
         })
-    
-        await Invoices.insertMany(invoices)
+
+        await insertNewInvoices(invoices)
 
         res.sendStatus(200)
     }
     catch(ex)
     {
-        console.log(ex.response.data)
+        console.log(ex)
+        // console.log(ex.response.data.exception.exceptionDetailList)
         if(ex.status === 429)
         {
             res.status(429).json({message: ex.response.data.status.details || "Too many request"})
