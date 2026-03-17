@@ -40,7 +40,7 @@ async function downloadInvoices(req,res)
             return {
                 ksefNumber:x.ksefNumber,
                 invoiceNumber:x.invoiceNumber,
-                issueDate:x.issueDate,
+                issueDate:x.issueDate.split('T')[0],
                 seller:{...x.seller},
                 buyer:{...x.buyer},
                 netAmount:x.netAmount,
@@ -52,19 +52,6 @@ async function downloadInvoices(req,res)
         })
     
         await Invoices.insertMany(invoices)
-
-        return
-        const promises = []
-        for(const key of invoices)
-        {
-            const data = await getInvoiceData(key.ksefNumber,accessToken)
-            console.log(data.data)
-            const sleep = () => new Promise(resolve=>setTimeout(resolve,500))
-            await sleep()
-        }
-        
-
-        console.log(promises)
 
         res.sendStatus(200)
     }

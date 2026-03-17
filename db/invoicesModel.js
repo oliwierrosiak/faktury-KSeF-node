@@ -20,6 +20,7 @@ const InvoicesModel = mongoose.Schema({
         default:null
     },
     invoiceNumber:String,
+    issueDate:String,
     seller:Object,
     buyer:Object,
     netAmount:Number,
