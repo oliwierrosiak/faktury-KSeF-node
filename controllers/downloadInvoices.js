@@ -25,8 +25,6 @@ async function downloadInvoices(req,res)
         
         const startDate = dateFilterSetter(lastInvoice[0])   
 
-        console.log(startDate)
-
         const invoicesMeta = await axios.post(`${process.env.KSEF}/invoices/query/metadata?pageSize=250`,{
             subjectType:'Subject2',
             dateRange:{
@@ -60,8 +58,6 @@ async function downloadInvoices(req,res)
     }
     catch(ex)
     {
-        console.log(ex)
-        // console.log(ex.response.data.exception.exceptionDetailList)
         if(ex.status === 429)
         {
             res.status(429).json({message: ex.response.data.status.details || "Too many request"})

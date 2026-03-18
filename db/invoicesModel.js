@@ -2,7 +2,7 @@ import mongoose, { mongo } from "mongoose";
 
 const invoiceFieldSchema = mongoose.Schema({
     name:String,
-    brutto:Number,
+    netAmount:Number,
     comment:{
         type:String,
         default:''
