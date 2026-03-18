@@ -6,8 +6,6 @@ async function transformXMLToJSON(xml)
         explicitArray: true,
         tagNameProcessors:[name => name.replace(/^ns\d*:/, '')]
     })
-    
-    console.log(obj)
     const rows = obj.Faktura.Fa[0].FaWiersz
     const necessaryFields = rows.map(x=>{
         return{

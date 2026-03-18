@@ -34,8 +34,14 @@ async function getSingleInvoice(req,res)
     }
     catch(ex)
     {
-        console.log(ex)
-        res.sendStatus(500)
+        if(ex.status === 429 && ex.response?.data?.status)
+        {
+            res.status(429).json(ex.response.data.status)
+        }
+        else
+        {
+            res.sendStatus(500)
+        }
     }
 }
 
