@@ -6,6 +6,7 @@ import getSingleInvoice from "../controllers/getSingleInvoiceData.js";
 import updateComment from "../controllers/updateComment.js";
 import updateInvoicePositionAction from "../controllers/updateInvoicePositionAction.js";
 import updateInvoiceAction from "../controllers/updateInvoiceAction.js";
+import generatePdf from "../controllers/generatePdf.js";
 
 const router = new Router()
 
@@ -22,5 +23,7 @@ router.get('/getInvoiceData',getSingleInvoice)
 router.post('/updateComment',updateComment)
 
 router.put('/updateInvoicePositionAction',updateInvoicePositionAction)
+
+router.post('/generatePdf',generatePdf)
 
 export default router

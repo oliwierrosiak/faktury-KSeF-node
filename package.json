@@ -19,6 +19,7 @@
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
     "mongoose": "^9.2.4",
+    "puppeteer": "^24.40.0",
     "xadesjs": "^2.6.5",
     "xml-crypto": "^6.1.2",
     "xml2js": "^0.6.2",
