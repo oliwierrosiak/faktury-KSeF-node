@@ -33,25 +33,26 @@ async function generatePdf(req,res)
         browser.close()
         
         const pdfDir = fs.readdirSync('temp')
-        
+
         const output = fs.createWriteStream('temp/faktury.zip')
         const zip = archiver('zip')
 
-        zip.pipe(output)
+       zip.pipe(output)
 
-        for(const file in pdfDir)
+        for(const file of pdfDir)
         {
-            zip.file(file)
+            zip.file(`temp/${file}`,{name:file})
         }
 
         await zip.finalize()
 
+        res.download("./temp/faktury.zip")
     }
     catch(ex)
     {
         console.log(ex)
+        res.sendStatus(500)
     }
-    res.sendStatus(200)
 }
 
 export default generatePdf
