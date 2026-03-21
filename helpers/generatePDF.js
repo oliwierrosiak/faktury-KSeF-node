@@ -110,8 +110,13 @@ async function generatePDF(data,page)
         path:'helpers/pdfStyle.css'
     })
 
+    const transformInvoiceNumber = (number) =>
+    {
+        return number.replaceAll('/','-')
+    }
+
     await page.pdf({
-        path:`./temp/${data.ksefNumber}.pdf`,
+        path:`./temp/${transformInvoiceNumber(data.invoiceNumber)}.pdf`,
         format: 'A4',
         printBackground:true,
     })

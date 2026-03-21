@@ -1,3 +1,4 @@
+import archiver from 'archiver'
 import { Invoices } from '../db/dbConfig.js'
 import generatePDF from '../helpers/generatePDF.js'
 import fs from 'fs'
@@ -30,6 +31,21 @@ async function generatePdf(req,res)
         }
 
         browser.close()
+        
+        const pdfDir = fs.readdirSync('temp')
+        
+        const output = fs.createWriteStream('temp/faktury.zip')
+        const zip = archiver('zip')
+
+        zip.pipe(output)
+
+        for(const file in pdfDir)
+        {
+            zip.file(file)
+        }
+
+        await zip.finalize()
+
     }
     catch(ex)
     {
