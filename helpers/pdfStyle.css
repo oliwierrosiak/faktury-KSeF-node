@@ -8,11 +8,6 @@
     padding: 0;
     box-sizing: border-box;
 }
-body
-{
-    padding: 10mm 10mm;
-    
-}
 .singleInvoice
 {
     display: flex;
@@ -20,6 +15,7 @@ body
     align-items: center;
     gap:15mm;
     break-after: page;
+    padding: 10mm 10mm;
 }
 header
 {
@@ -233,4 +229,8 @@ header>p
     font-weight: 600;
     font-family: "Inter", sans-serif;
     color: #6B7280;
+}
+.commentsContent
+{
+    white-space: pre-line;
 }

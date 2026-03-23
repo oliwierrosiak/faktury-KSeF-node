@@ -1,5 +1,21 @@
 function createPdfHtml(data)
 {
+
+    const transformInvoiceAction = (action) =>
+    {
+        switch(action)
+        {
+            case 'notRecord':
+                return 'Nie Księgować'
+            case 'cost':
+                return 'Koszt'
+            // case 'goods':
+            //     return 'Towar Handlowy'
+            default:
+                return ''
+        }
+    }
+
     const html = `
     <html>
 
@@ -13,12 +29,12 @@ function createPdfHtml(data)
             ${data.map(x => `
                 <article class="singleInvoice">
                  <header>
-                    <h1>Faktura nr: FAS/16055/03/2026/GL</h1>
-                    <p>Numer KSeF: 6462490527-20260318-3E6116000013-9E</p>
-                    <p>Data wystawienia: 2026-03-18</p>
-                    <p>Rodzaj faktury: Vat</p>
+                    <h1>Faktura nr: ${x.invoiceNumber}</h1>
+                    <p>Numer KSeF: ${x.ksefNumber}</p>
+                    <p>Data wystawienia: ${x.issueDate}</p>
+                    <p>Rodzaj faktury: ${x.invoiceType}</p>
                     <div class="action">
-                        <h2>Nie Księgować</h2>
+                        <h2>${transformInvoiceAction(x.action)}</h2>
                     </div>
                 </header>  
                 
@@ -26,15 +42,15 @@ function createPdfHtml(data)
                     <div class="infoItem">
                         <h2>Sprzedawca</h2>
                         <div class="line"></div>
-                        <p>Nazwa: ELTROX SP. Z O.O.</p>
-                        <p>NIP: 6462490527</p>
+                        <p>Nazwa: ${x.seller.name}</p>
+                        ${x.seller.nip?`<p>NIP: ${x.seller.nip}</p>`:''}
                     </div>
 
                     <div class="infoItem">
                         <h2>Nabywca</h2>
                         <div class="line"></div>
-                        <p>Nazwa: ELTROX SP. Z O.O.</p>
-                        <p>NIP: 6462490527</p>
+                        <p>Nazwa: ${x.buyer.name}</p>
+                        ${x.buyer?.identifier?.type === 'Nip'?`<p>NIP:${x.buyer.identifier.value}</p>`:''}
                     </div>
                 </section>
 
@@ -120,23 +136,23 @@ function createPdfHtml(data)
                     <div class="sumTableHeader">Wartość Netto</div>
                     <div class="sumTableHeader">VAT</div>
                     <div class="sumTableHeader">Wartość Brutto</div>
-                    <div class="sumTableItem">5550 PLN</div>
-                    <div class="sumTableItem">1276.5 PLN</div>
-                    <div class="sumTableItem bold">6826.5 PLN</div>
+                    <div class="sumTableItem">${`${x.netAmount} ${x.currency}`}</div>
+                    <div class="sumTableItem">${`${x.vatAmount} ${x.currency}`}</div>
+                    <div class="sumTableItem bold">${`${x.grossAmount} ${x.currency}`}</div>
                 </section>
 
                 <section class="paymentAndComments">
                     <div class="paymentAndCommentsItem">
                         <h2>Płatność</h2>
                         <div class="line"></div>
-                        <p>Metoda Płatności: Przelew</p>
-                        <p>Oplacono dnia: 2026-03-12</p>
+                        <p>Metoda Płatności: ${x.paymentMethod}</p>
+                        <p>${x.paymentDate}</p>
                     </div>
 
                     <div class="paymentAndCommentsItem">
                         <h2>Uwagi</h2>
                         <div class="line"></div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin facilisis, sapien nec lacinia convallis, orci metus tincidunt leo, at vehicula lorem ligula ut nibh. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Suspendisse potenti. In fringilla aliquet nulla. Fusce id condimentum risus. In vestibulum quam lorem, nec ullamcorper magna blandit ac. Nulla facilisi. Sed eget sapien suscipit, tempor lacus non, sollicitudin nulla.</p>
+                        <p class="commentsContent">${x.comments === ''?'brak':x.comments}</p>
                     </div>
                 </section>
             </article>
