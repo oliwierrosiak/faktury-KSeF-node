@@ -36,7 +36,9 @@ const InvoicesModel = mongoose.Schema({
     comments:{
         type:String,
         default:''
-    }
+    },
+    paymentMethod:String,
+    paymentDate:String,
 })
 
 export default InvoicesModel
