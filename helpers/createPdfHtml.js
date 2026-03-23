@@ -103,13 +103,13 @@ function createPdfHtml(data)
                             ${y.comment != ''?`<h3 class="positionComment">${y.comment}</h3>`:''}
                         </div>
                         <div class="tableItem">
-                            ${y.netAmount} ${x.currency}
+                            ${y.netAmount.toFixed(2)} ${x.currency}
                         </div>
                         <div class="tableItem">
-                             ${y.netAmount} ${x.currency}
+                             ${y.vatAmount.toFixed(2)} ${x.currency}
                         </div>
                         <div class="tableItem">
-                            ${y.netAmount} ${x.currency}
+                            ${y.grossAmount.toFixed(2)} ${x.currency}
                         </div>
                         <div class="tableItem">
                             ${getPositionAction(x.action,y.action)}
@@ -124,9 +124,9 @@ function createPdfHtml(data)
                     <div class="sumTableHeader">Wartość Netto</div>
                     <div class="sumTableHeader">VAT</div>
                     <div class="sumTableHeader">Wartość Brutto</div>
-                    <div class="sumTableItem">${`${x.netAmount} ${x.currency}`}</div>
-                    <div class="sumTableItem">${`${x.vatAmount} ${x.currency}`}</div>
-                    <div class="sumTableItem bold">${`${x.grossAmount} ${x.currency}`}</div>
+                    <div class="sumTableItem">${`${x.netAmount.toFixed(2)} ${x.currency}`}</div>
+                    <div class="sumTableItem">${`${x.vatAmount.toFixed(2)} ${x.currency}`}</div>
+                    <div class="sumTableItem bold">${`${x.grossAmount.toFixed(2)} ${x.currency}`}</div>
                 </section>
 
                 <section class="paymentAndComments">
