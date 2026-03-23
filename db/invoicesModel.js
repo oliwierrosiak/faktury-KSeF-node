@@ -32,7 +32,11 @@ const InvoicesModel = mongoose.Schema({
     vatAmount:Number,
     currency:String,
     invoiceType:String,
-    invoiceFields:[invoiceFieldSchema]
+    invoiceFields:[invoiceFieldSchema],
+    comments:{
+        type:String,
+        default:''
+    }
 })
 
 export default InvoicesModel
