@@ -96,18 +96,18 @@ header>p
 }
 .table
 {
-    width: 99%;
     border:1mm solid #6B7280;
     border-radius: 15px;
     background-color: #E5E7EB;
     overflow: hidden;
     padding-bottom: 4mm;
+    width: 99%;
 }
 .rowHeader
 {
     display:  grid;
     width: 100%;
-    grid-template-columns: 3fr 2fr 2fr;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
 }
 .tableHeader
 {
@@ -118,14 +118,14 @@ header>p
     text-align: center;
     padding: 2mm;
     font-weight: 700;
-    font-size:4mm;
+    font-size:3mm;
     font-family: "Inter", sans-serif;
 }
 .row
 {
     display:  grid;
     width: 100%;
-    grid-template-columns: 3fr 2fr 2fr;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
     padding: 4mm 2mm;
 }
 .tableItem
@@ -135,7 +135,7 @@ header>p
     align-items: center;
     text-align: center;
     font-weight: 700;
-    font-size: 3mm;
+    font-size: 2.5mm;
     font-family: "Inter", sans-serif;
     color: #1F2937;
     padding: 0 1mm;
@@ -150,13 +150,13 @@ header>p
 .tableItemName>h2
 {
     font-weight: 700;
-    font-size: 3mm;
+    font-size: 2.5mm;
     font-family: "Inter", sans-serif;
     color: #1F2937;
 }
 .tableItemName>h3
 {
-    font-size: 3mm;
+    font-size: 2mm;
     font-weight: 600;
     font-family: "Roboto", sans-serif;
     color: #6B7280;
@@ -178,7 +178,7 @@ header>p
     align-items: center;
     text-align: center;
     font-family: "Inter", sans-serif;
-    font-size: 4mm;
+    font-size: 3mm;
     font-weight: 700;
     border: .5mm solid #6B7280;
 }
@@ -191,11 +191,41 @@ header>p
     font-family: "Roboto", sans-serif;
     text-align: center;
     font-weight: 500;
-    font-size: 4mm;
+    font-size: 3mm;
     padding: 2mm 4mm;
     border: .5mm solid #6B7280;
 }
 .bold
 {
     font-weight: 900;
+}
+.paymentAndComments
+{
+    gap:10mm;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.paymentAndCommentsItem
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap:3mm;
+}
+.paymentAndCommentsItem>h2
+{
+    font-size:5mm;
+    font-weight: 700;
+    padding-left: 6mm;
+    color: #1F2937;
+    font-family: "Inter", sans-serif;
+    
+}
+.paymentAndCommentsItem>p
+{
+    font-size: 3mm;
+    font-weight: 600;
+    font-family: "Inter", sans-serif;
+    color: #6B7280;
 }
