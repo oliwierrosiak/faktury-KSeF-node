@@ -1,4 +1,5 @@
 import xml2js from 'xml2js'
+import { getNetAmount,getGrossAmount, getVatAmount } from './countingNetGrossAndVatAmount.js'
 
 async function transformXMLToJSON(xml)
 {
@@ -54,10 +55,13 @@ async function transformXMLToJSON(xml)
     }
 
     const rows = obj.Faktura.Fa[0].FaWiersz
+
     const necessaryFields = rows.map(x=>{
         return{
             name:x.P_7[0],
-            netAmount:Number(x.P_11?.[0] || x.P_11A?.[0] || x.P_11B?.[0]),
+            netAmount:getNetAmount(x),
+            grossAmount:getGrossAmount(x),
+            vatAmount:getVatAmount(x)
         }
     })
     return {preparedFields:necessaryFields,paymentMethod:paymentForm,paymentDate:paymentDate}

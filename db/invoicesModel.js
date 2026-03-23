@@ -3,6 +3,8 @@ import mongoose, { mongo } from "mongoose";
 const invoiceFieldSchema = mongoose.Schema({
     name:String,
     netAmount:Number,
+    grossAmount:Number,
+    vatAmount:Number,
     comment:{
         type:String,
         default:''
