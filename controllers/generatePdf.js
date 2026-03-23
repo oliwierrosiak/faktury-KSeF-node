@@ -1,6 +1,6 @@
 import archiver from 'archiver'
 import { Invoices } from '../db/dbConfig.js'
-import generatePDF from '../helpers/generatePDF.js'
+import createPdfHtml from '../helpers/createPdfHtml.js'
 import fs from 'fs'
 import puppeteer from 'puppeteer'
 
@@ -25,28 +25,25 @@ async function generatePdf(req,res)
 
         clearTemp()
 
-        for(let i = 0;i<invoicesToGenerate.length;i++)
-        {
-            await generatePDF(invoicesToGenerate[i],page)
-        }
+        const html = createPdfHtml(invoicesToGenerate)
+
+        await page.setContent(html,{waitUntil:'domcontentloaded'})
+
+        await page.addStyleTag({
+            path:'helpers/pdfStyle.css'
+        })
+
+        await page.pdf({
+            path:`./temp/faktury.pdf`,
+            format: 'A4',
+            printBackground:true,
+        })
 
         browser.close()
         
         const pdfDir = fs.readdirSync('temp')
 
-        const output = fs.createWriteStream('temp/faktury.zip')
-        const zip = archiver('zip')
-
-       zip.pipe(output)
-
-        for(const file of pdfDir)
-        {
-            zip.file(`temp/${file}`,{name:file})
-        }
-
-        await zip.finalize()
-
-        res.download("./temp/faktury.zip")
+    //     res.download("./temp/faktury.zip")
     }
     catch(ex)
     {
