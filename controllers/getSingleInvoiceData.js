@@ -11,7 +11,7 @@ async function getSingleInvoice(req,res)
     {
         let invoice = await Invoices.findById(req.query.id)
 
-        // if(invoice.invoiceFields.length == 0)
+        if(invoice.invoiceFields.length == 0)
         {
             const {token,number} = await ksefAuth()
             const auth = await awaitUntilAuthBeDone(number,token)
@@ -34,7 +34,6 @@ async function getSingleInvoice(req,res)
     }
     catch(ex)
     {
-        console.log(ex)
         if(ex.status === 429 && ex.response?.data?.status)
         {
             res.status(429).json(ex.response.data.status)

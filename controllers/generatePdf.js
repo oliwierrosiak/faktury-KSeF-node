@@ -45,7 +45,6 @@ async function generatePdf(req,res)
     }
     catch(ex)
     {
-        console.log(ex)
         res.sendStatus(500)
     }
 }

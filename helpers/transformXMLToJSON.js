@@ -51,7 +51,7 @@ async function transformXMLToJSON(xml)
 
     if(payment?.TerminPlatnosci?.[0])
     {
-        paymentDate = `Termin płatności: ${payment.TerminPlatnosci[0].Termin[0]}`
+        paymentDate = `Termin Płatności: ${payment.TerminPlatnosci[0].Termin[0]}`
     }
 
     const rows = obj.Faktura.Fa[0].FaWiersz

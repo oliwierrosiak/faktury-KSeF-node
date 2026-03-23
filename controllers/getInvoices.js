@@ -25,7 +25,6 @@ async function getInvoices(req,res)
     }
     catch(ex)
     {
-        console.log(ex)
         res.sendStatus(404)
     }
 }

@@ -96,7 +96,26 @@ function createPdfHtml(data)
                         </div>
                     </div>
 
-                    ${x.invoiceFields.map(y=>`
+                    ${x.invoiceFields.length === 0?
+                    `<div class="row">
+                        <div class="tableItem">
+                            Brak Danych  
+                        </div>
+                        <div class="tableItem">
+                            Brak Danych
+                        </div>
+                        <div class="tableItem">
+                            Brak Danych
+                        </div>
+                        <div class="tableItem">
+                            Brak Danych
+                        </div>
+                        <div class="tableItem">
+                            -
+                        </div>
+                    </div>`
+                    :
+                    x.invoiceFields.map(y=>`
                     <div class="row">
                         <div class="tableItemName">
                             <h2>${y.name}</h2>   
@@ -133,8 +152,8 @@ function createPdfHtml(data)
                     <div class="paymentAndCommentsItem">
                         <h2>Płatność</h2>
                         <div class="line"></div>
-                        <p>Metoda Płatności: ${x.paymentMethod}</p>
-                        <p>${x.paymentDate}</p>
+                        <p>Metoda Płatności: ${x.paymentMethod || 'Brak Danych'}</p>
+                        <p>${x.paymentDate || 'Termin Płatności: Brak Danych'}</p>
                     </div>
 
                     <div class="paymentAndCommentsItem">
