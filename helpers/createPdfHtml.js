@@ -100,7 +100,7 @@ function createPdfHtml(data)
                     <div class="row">
                         <div class="tableItemName">
                             <h2>${y.name}</h2>   
-                            ${y.comment != ''?`<h3>${y.comment}</h3>`:''}
+                            ${y.comment != ''?`<h3 class="positionComment">${y.comment}</h3>`:''}
                         </div>
                         <div class="tableItem">
                             ${y.netAmount} ${x.currency}

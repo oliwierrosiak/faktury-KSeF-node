@@ -234,3 +234,7 @@ header>p
 {
     white-space: pre-line;
 }
+.positionComment
+{
+    word-break: break-all;
+}
