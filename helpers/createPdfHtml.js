@@ -9,10 +9,31 @@ function createPdfHtml(data)
                 return 'Nie Księgować'
             case 'cost':
                 return 'Koszt'
-            // case 'goods':
-            //     return 'Towar Handlowy'
             default:
                 return ''
+        }
+    }
+
+    const getPositionAction = (invoiceAction,positionAction) =>
+    {
+        if(invoiceAction === 'notRecord' || positionAction === 'notRecord')
+        {
+            return 'Nie księgować'
+        }
+        else if(invoiceAction === 'cost' || positionAction === 'cost')
+        {
+            return 'Koszt'
+        }
+        else
+        {
+            if(positionAction === 'goods')
+            {
+                return 'Towar Handlowy'
+            }
+            else
+            {
+                return '-'
+            }
         }
     }
 
@@ -75,60 +96,27 @@ function createPdfHtml(data)
                         </div>
                     </div>
 
+                    ${x.invoiceFields.map(y=>`
                     <div class="row">
                         <div class="tableItemName">
-                            <h2>Obudowa Rack CCTV Getfort 3U (łatwy dostęp) 580*540*180mm Czarna</h2>   
-                            <h3>Komentarz</h3>
+                            <h2>${y.name}</h2>   
+                            ${y.comment != ''?`<h3>${y.comment}</h3>`:''}
                         </div>
                         <div class="tableItem">
-                            206.32 PLN
+                            ${y.netAmount} ${x.currency}
                         </div>
                         <div class="tableItem">
-                            206.32 PLN
+                             ${y.netAmount} ${x.currency}
                         </div>
                         <div class="tableItem">
-                            206.32 PLN
+                            ${y.netAmount} ${x.currency}
                         </div>
                         <div class="tableItem">
-                            Nie Księgować
+                            ${getPositionAction(x.action,y.action)}
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="tableItemName">
-                            <h2>SZAFA RACK GETFORT 19 CALI 6U 600X600 WISZĄCA DRZWI STALOWE</h2>   
-                        </div>
-                        <div class="tableItem">
-                            285.68 PLN
-                        </div>
-                        <div class="tableItem">
-                            285.68 PLN
-                        </div>
-                        <div class="tableItem">
-                            285.68 PLN
-                        </div>
-                        <div class="tableItem">
-                            Koszt
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="tableItemName">
-                            <h2>Koszty dostawy</h2>   
-                        </div>
-                        <div class="tableItem">
-                            14.76 PLN
-                        </div>
-                        <div class="tableItem">
-                            14.76 PLN
-                        </div>
-                        <div class="tableItem">
-                            14.76 PLN
-                        </div>
-                        <div class="tableItem">
-                            Towar Handlowy
-                        </div>
-                    </div>
+                    </div>      
+                    `
+                    ).join('')}
 
                 </section>
 
