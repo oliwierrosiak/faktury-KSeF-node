@@ -40,10 +40,8 @@ async function generatePdf(req,res)
         })
 
         browser.close()
-        
-        const pdfDir = fs.readdirSync('temp')
 
-    //     res.download("./temp/faktury.zip")
+        res.download("./temp/faktury.pdf")
     }
     catch(ex)
     {
