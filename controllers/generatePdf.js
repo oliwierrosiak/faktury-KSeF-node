@@ -1,4 +1,3 @@
-import archiver from 'archiver'
 import { Invoices } from '../db/dbConfig.js'
 import createPdfHtml from '../helpers/createPdfHtml.js'
 import fs from 'fs'

@@ -89,7 +89,7 @@ function createPdfHtml(data)
                             VAT
                         </div>
                         <div class="tableHeader">
-                            Wartośc Brutto
+                            Wartość Brutto
                         </div>
                         <div class="tableHeader">
                             Akcja
