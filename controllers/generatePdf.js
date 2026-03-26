@@ -32,6 +32,10 @@ async function generatePdf(req,res)
             path:'helpers/pdfStyle.css'
         })
 
+        await page.addScriptTag({
+            path:'helpers/pdfScript.js'
+        })
+
         await page.pdf({
             path:`./temp/faktury.pdf`,
             format: 'A4',

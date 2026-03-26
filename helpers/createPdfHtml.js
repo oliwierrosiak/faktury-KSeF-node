@@ -32,7 +32,7 @@ function createPdfHtml(data)
             }
             else
             {
-                return '-'
+                return ''
             }
         }
     }
@@ -77,66 +77,65 @@ function createPdfHtml(data)
                 </section>
 
 
-                <section class="table">
+                <section class="tableArticle">
 
-                    <div class="rowHeader">
-                        <div class="tableHeader">
-                            Nazwa
-                        </div>
-                        <div class="tableHeader">
-                            Wartość Netto
-                        </div>
-                        <div class="tableHeader">
-                            VAT
-                        </div>
-                        <div class="tableHeader">
-                            Wartość Brutto
-                        </div>
-                        <div class="tableHeader">
-                            Akcja
-                        </div>
+                    <div class="actions">
+                        ${x.invoiceFields.length > 0 ?x.invoiceFields.map(y=>`<div class="actionItem ${x.action === 'notRecord' || y.action === 'notRecord'?'colorRed':''}">
+                            ${getPositionAction(x.action,y.action)}
+                        </div>`).join(''): ''}
                     </div>
 
-                    ${x.invoiceFields.length === 0?
-                    `<div class="row">
-                        <div class="tableItem">
-                            Brak Danych  
+                    <div class="table">
+                        <div class="rowHeader">
+                            <div class="tableHeader">
+                                Nazwa
+                            </div>
+                            <div class="tableHeader">
+                                Wartość Netto
+                            </div>
+                            <div class="tableHeader">
+                                VAT
+                            </div>
+                            <div class="tableHeader">
+                                Wartość Brutto
+                            </div>
                         </div>
-                        <div class="tableItem">
-                            Brak Danych
-                        </div>
-                        <div class="tableItem">
-                            Brak Danych
-                        </div>
-                        <div class="tableItem">
-                            Brak Danych
-                        </div>
-                        <div class="tableItem">
-                            -
-                        </div>
-                    </div>`
-                    :
-                    x.invoiceFields.map(y=>`
-                    <div class="row">
-                        <div class="tableItemName">
-                            <h2>${y.name}</h2>   
-                            ${y.comment != ''?`<h3 class="positionComment">${y.comment}</h3>`:''}
-                        </div>
-                        <div class="tableItem">
-                            ${y.netAmount.toFixed(2)} ${x.currency}
-                        </div>
-                        <div class="tableItem">
-                             ${y.vatAmount.toFixed(2)} ${x.currency}
-                        </div>
-                        <div class="tableItem">
-                            ${y.grossAmount.toFixed(2)} ${x.currency}
-                        </div>
-                        <div class="tableItem">
-                            ${getPositionAction(x.action,y.action)}
-                        </div>
-                    </div>      
-                    `
-                    ).join('')}
+
+                        ${x.invoiceFields.length === 0?
+                        `<div class="row">
+                            <div class="tableItem">
+                                Brak Danych  
+                            </div>
+                            <div class="tableItem">
+                                Brak Danych
+                            </div>
+                            <div class="tableItem">
+                                Brak Danych
+                            </div>
+                            <div class="tableItem">
+                                Brak Danych
+                            </div>
+                        </div>`
+                        :
+                        x.invoiceFields.map(y=>`
+                        <div class="row">
+                            <div class="tableItemName">
+                                <h2>${y.name}</h2>   
+                                ${y.comment != ''?`<h3  class="positionComment">${y.comment}</   h3>`:''}
+                            </div>
+                            <div class="tableItem">
+                                ${y.netAmount.toFixed(2)} ${x.currency}
+                            </div>
+                            <div class="tableItem">
+                                 ${y.vatAmount.toFixed(2)} ${x.currency}
+                            </div>
+                            <div class="tableItem">
+                                ${y.grossAmount.toFixed(2)} ${x.    currency}
+                            </div>
+                        </div>      
+                        `
+                        ).join('')}
+                    </div>
 
                 </section>
 
