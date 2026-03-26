@@ -41,6 +41,7 @@ const InvoicesModel = mongoose.Schema({
     },
     paymentMethod:String,
     paymentDate:String,
+    dateOfPayment:String
 })
 
 export default InvoicesModel

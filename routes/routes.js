@@ -8,6 +8,7 @@ import updateInvoicePositionAction from "../controllers/updateInvoicePositionAct
 import updateInvoiceAction from "../controllers/updateInvoiceAction.js";
 import generatePdf from "../controllers/generatePdf.js";
 import updateInvoiceComments from "../controllers/updateInvoiceComments.js";
+import updateDateOfPayment from "../controllers/updateDateOfPayment.js";
 
 const router = new Router()
 
@@ -28,5 +29,7 @@ router.put('/updateInvoicePositionAction',updateInvoicePositionAction)
 router.post('/generatePdf',generatePdf)
 
 router.post('/updateInvoiceComments',updateInvoiceComments)
+
+router.put('/updateDateOfPayment',updateDateOfPayment)
 
 export default router
