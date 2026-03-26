@@ -56,6 +56,12 @@ async function transformXMLToJSON(xml)
 
     const rows = obj.Faktura.Fa[0].FaWiersz
 
+    const sellDate = obj.Faktura.Fa[0].P_6?.[0] ? obj.Faktura.Fa[0].P_6[0] : (obj.Faktura.Fa[0].P_1?.[0] ? obj.Faktura.Fa[0].P_1[0] : null)
+
+    // console.log(obj.Faktura.Fa[0].P_6)
+    // console.log(obj.Faktura.Fa[0].P_1)
+    // console.log(sellDate)
+
     const necessaryFields = rows.map(x=>{
         return{
             name:x.P_7[0],
@@ -64,7 +70,7 @@ async function transformXMLToJSON(xml)
             vatAmount:getVatAmount(x)
         }
     })
-    return {preparedFields:necessaryFields,paymentMethod:paymentForm,paymentDate:paymentDate}
+    return {preparedFields:necessaryFields,paymentMethod:paymentForm,paymentDate:paymentDate,sellDate}
 }
 
 export default transformXMLToJSON

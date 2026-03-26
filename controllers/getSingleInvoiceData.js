@@ -23,9 +23,11 @@ async function getSingleInvoice(req,res)
 
             const invoiceFields = await axios.get(`${process.env.KSEF}/invoices/ksef/${invoice.ksefNumber}`,{headers:{"Authorization":`Bearer ${accessToken}`}})
 
-            const {preparedFields,paymentMethod,paymentDate} = await transformXMLToJSON(invoiceFields.data)
+            const {preparedFields,paymentMethod,paymentDate,sellDate} = await transformXMLToJSON(invoiceFields.data)
 
-            await Invoices.updateOne({_id:invoice._id},{$set: {invoiceFields:preparedFields,paymentMethod:paymentMethod,paymentDate:paymentDate}})
+            console.log(sellDate)
+
+            await Invoices.updateOne({_id:invoice._id},{$set: {invoiceFields:preparedFields,paymentMethod:paymentMethod,paymentDate:paymentDate,sellDate:sellDate}})
 
             invoice = await Invoices.findById(invoice._id)
         }
