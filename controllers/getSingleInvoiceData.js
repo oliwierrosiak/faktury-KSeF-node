@@ -25,8 +25,6 @@ async function getSingleInvoice(req,res)
 
             const {preparedFields,paymentMethod,paymentDate,sellDate} = await transformXMLToJSON(invoiceFields.data)
 
-            console.log(sellDate)
-
             await Invoices.updateOne({_id:invoice._id},{$set: {invoiceFields:preparedFields,paymentMethod:paymentMethod,paymentDate:paymentDate,sellDate:sellDate}})
 
             invoice = await Invoices.findById(invoice._id)
