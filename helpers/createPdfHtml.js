@@ -56,7 +56,7 @@ function createPdfHtml(data)
                     ${x.sellDate && `<p>Data sprzedaży: ${x.sellDate}</p>`}
                     <p>Rodzaj faktury: ${x.invoiceType}</p>
                     <div class="action">
-                        <h2>${transformInvoiceAction(x.action)}</h2>
+                        <h2 class="${x.action == 'notRecord'?'colorRed':''}">${transformInvoiceAction(x.action)}</h2>
                     </div>
                 </header>  
                 
@@ -160,8 +160,7 @@ function createPdfHtml(data)
                     <div class="paymentAndCommentsItem">
                         <h2>Uwagi</h2>
                         <div class="line"></div>
-                        <p class="commentsContent">
-                            ${x.dateOfPayment?(x.comments ? `Opłacono dnia: ${x.dateOfPayment}<br><br>${x.comments}`:`Opłacono dnia: ${x.dateOfPayment}`):(x.comments === ''?'brak':x.comments)}
+                        <p class="commentsContent">${x.dateOfPayment?(x.comments ? `Opłacono dnia: ${x.dateOfPayment}<br><br>${x.comments}`:`Opłacono dnia: ${x.dateOfPayment}`):(x.comments === ''?'brak':x.comments)}
                         </p>
                     </div>
                 </section>
