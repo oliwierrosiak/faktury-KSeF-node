@@ -108,13 +108,15 @@ header>p
     font-family: "Inter", sans-serif;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     color: #1F2937;
+    padding: 3mm 0;
+
 }
 .rowHeader
 {
     display: grid;
-    grid-template-columns: .8fr 2fr 1fr 1fr 1fr;
+    grid-template-columns: .8fr 10mm 2fr 1fr 1fr 1fr;
 }
 .tableHeader
 {
@@ -130,7 +132,7 @@ header>p
 {
     grid-column: 2/5;
     display: grid;
-    grid-template-columns: .8fr 2fr 1fr 1fr 1fr;
+    grid-template-columns: .8fr 10mm 2fr 1fr 1fr 1fr;
 }
 .tableItem
 {
@@ -144,11 +146,17 @@ header>p
     color: #1F2937;
     padding: 3mm 0;
 }
+.LpItem
+{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
 .tableItemName
 {
     display: flex;
     flex-direction: column;
-    padding: 3mm 3mm;
+    padding: 3mm 0;
     gap:2mm;
 }
 .tableItemName>h2

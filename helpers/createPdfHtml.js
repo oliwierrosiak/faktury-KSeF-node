@@ -90,7 +90,8 @@ function createPdfHtml(data)
                         <div class="rowHeader">
                             <div>
                             </div>
-                            <div class="tableHeader tableBorderTop tableBorderLeft">
+                            <div class="tableHeader tableBorderTop tableBorderLeft ">Lp.</div>
+                            <div class="tableHeader tableBorderTop">
                                 Nazwa
                             </div>
                             <div class="tableHeader tableBorderTop">
@@ -108,7 +109,8 @@ function createPdfHtml(data)
                         `<div class="row">
                             <div class="actionItem">
                             </div>
-                            <div class="tableItem tableBorderLeft tableBorderBottom">
+                            <div class="tableHeader tableBorderLeft tableBorderBottom">-</div>
+                            <div class="tableItem tableBorderBottom">
                                 Brak Danych  
                             </div>
                             <div class="tableItem tableBorderBottom">
@@ -127,7 +129,10 @@ function createPdfHtml(data)
                             <div class="actionItem ${getPositionAction(x.action,y.action) === "Nie księgować"?'colorRed':''}">
                             ${getPositionAction(x.action,y.action)}
                             </div>
-                            <div class="tableItemName tableBorderLeft ${idx+1 == x.invoiceFields.length?'tableBorderBottom':''}">
+                            <div class="tableItem LpItem tableBorderLeft ${idx+1 == x.invoiceFields.length?'tableBorderBottom':''}">
+                                ${idx+1}.
+                            </div>
+                            <div class="tableItemName ${idx+1 == x.invoiceFields.length?'tableBorderBottom':''}">
                                 <h2>${y.name}</h2>   
                                 ${y.comment != ''?`<h3  class="positionComment">${y.comment}</   h3>`:''}
                             </div>
