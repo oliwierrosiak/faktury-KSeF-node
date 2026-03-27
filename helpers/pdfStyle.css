@@ -99,6 +99,8 @@ header>p
 {
     overflow: hidden;
     width: 100%;
+    break-inside: avoid;
+    page-break-inside: avoid;
 }
 .actionItem
 {
@@ -189,15 +191,14 @@ header>p
 {
     border-bottom: .6mm solid #6B7280;
 }
-
-
-
 .sumTable
 {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     width: max-content;
     border: .5mm solid #6B7280;
+    break-inside: avoid;
+    page-break-inside: avoid;
 }
 .sumTableHeader
 {
@@ -236,6 +237,8 @@ header>p
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
+    break-inside: avoid;
+    page-break-inside: avoid;
 }
 .paymentAndCommentsItem
 {
