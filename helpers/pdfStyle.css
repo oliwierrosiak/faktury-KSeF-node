@@ -94,30 +94,16 @@ header>p
     font-family: "Inter", sans-serif;
     color: #6B7280;
 }
-.tableArticle
-{
-    display: grid;
-    width: 100%;
-    grid-template-columns: 25mm 1fr;
-    gap:3mm;
-}
+
 .table
 {
-    border:.6mm solid #6B7280;
     overflow: hidden;
     width: 100%;
-    height: max-content;
-}
-.actions
-{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
 }
 .actionItem
 {
     text-align: center;
-    font-size: 2.8mm;
+    font-size: 2.5mm;
     font-weight: 700;
     font-family: "Inter", sans-serif;
     display: flex;
@@ -127,28 +113,24 @@ header>p
 }
 .rowHeader
 {
-    display:  grid;
-    width: 100%;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
+    display: grid;
+    grid-template-columns: .8fr 2fr 1fr 1fr 1fr;
 }
 .tableHeader
 {
     background-color: #8a919c;
     color: white;
-    width: 100%;
-    height: 100%;
     text-align: center;
     padding: 2mm;
     font-weight: 700;
-    font-size:3mm;
+    font-size: 3mm;
     font-family: "Inter", sans-serif;
 }
 .row
 {
-    display:  grid;
-    width: 100%;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
-    padding: 4mm 2mm;
+    grid-column: 2/5;
+    display: grid;
+    grid-template-columns: .8fr 2fr 1fr 1fr 1fr;
 }
 .tableItem
 {
@@ -160,13 +142,13 @@ header>p
     font-size: 2.5mm;
     font-family: "Inter", sans-serif;
     color: #1F2937;
-    padding: 0 1mm;
+    padding: 3mm 0;
 }
 .tableItemName
 {
     display: flex;
     flex-direction: column;
-    padding: 0 2mm;
+    padding: 3mm 3mm;
     gap:2mm;
 }
 .tableItemName>h2
@@ -183,6 +165,25 @@ header>p
     font-family: "Roboto", sans-serif;
     color: #6B7280;
 }
+.tableBorderLeft
+{
+    border-left: .6mm solid #6B7280;
+}
+.tableBorderRight
+{
+    border-right: .6mm solid #6B7280;
+}
+.tableBorderTop
+{
+    border-top: .6mm solid #6B7280;
+}
+.tableBorderBottom
+{
+    border-bottom: .6mm solid #6B7280;
+}
+
+
+
 .sumTable
 {
     display: grid;

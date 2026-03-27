@@ -3,10 +3,10 @@ const header = [...document.querySelectorAll('.rowHeader')]
 const actionItems = [...document.querySelectorAll(".actionItem")]
 const actions = [...document.querySelectorAll(".actions")]
 actionItems.forEach((x,idx)=>{
-    const height = rows[idx].clientHeight
+    const height = rows[idx].getBoundingClientRect().height
     x.style.height = `${height}px`
 })
 actions.forEach((x,idx)=>{
-    const padding = header[idx].clientHeight
+    const padding = header[idx].getBoundingClientRect().height
     x.style.paddingTop = `${padding}px`
 })

@@ -16,11 +16,11 @@ function createPdfHtml(data)
 
     const getPositionAction = (invoiceAction,positionAction) =>
     {
-        if(invoiceAction === 'notRecord' || positionAction === 'notRecord')
+        if(invoiceAction === 'notRecord')
         {
             return 'Nie księgować'
         }
-        else if(invoiceAction === 'cost' || positionAction === 'cost')
+        else if(invoiceAction === 'cost')
         {
             return 'Koszt'
         }
@@ -29,6 +29,14 @@ function createPdfHtml(data)
             if(positionAction === 'goods')
             {
                 return 'Towar Handlowy'
+            }
+            else if(positionAction === 'notRecord')
+            {
+                return 'Nie księgować'
+            }
+            else if(positionAction === 'cost')
+            {
+                return 'Koszt'
             }
             else
             {
@@ -53,7 +61,7 @@ function createPdfHtml(data)
                     <h1>Faktura nr: ${x.invoiceNumber}</h1>
                     <p>Numer KSeF: ${x.ksefNumber}</p>
                     <p>Data wystawienia: ${x.issueDate}</p>
-                    ${x.sellDate && `<p>Data sprzedaży: ${x.sellDate}</p>`}
+                    ${x.sellDate ? `<p>Data sprzedaży: ${x.sellDate}</p>`:''}
                     <p>Rodzaj faktury: ${x.invoiceType}</p>
                     <div class="action">
                         <h2 class="${x.action == 'notRecord'?'colorRed':''}">${transformInvoiceAction(x.action)}</h2>
@@ -77,66 +85,64 @@ function createPdfHtml(data)
                 </section>
 
 
-                <section class="tableArticle">
+                <section class="table">
 
-                    <div class="actions">
-                        ${x.invoiceFields.length > 0 ?x.invoiceFields.map(y=>`<div class="actionItem ${x.action === 'notRecord' || y.action === 'notRecord'?'colorRed':''}">
-                            ${getPositionAction(x.action,y.action)}
-                        </div>`).join(''): ''}
-                    </div>
-
-                    <div class="table">
                         <div class="rowHeader">
-                            <div class="tableHeader">
+                            <div>
+                            </div>
+                            <div class="tableHeader tableBorderTop tableBorderLeft">
                                 Nazwa
                             </div>
-                            <div class="tableHeader">
+                            <div class="tableHeader tableBorderTop">
                                 Wartość Netto
                             </div>
-                            <div class="tableHeader">
+                            <div class="tableHeader tableBorderTop">
                                 VAT
                             </div>
-                            <div class="tableHeader">
+                            <div class="tableHeader tableBorderTop tableBorderRight">
                                 Wartość Brutto
                             </div>
                         </div>
 
                         ${x.invoiceFields.length === 0?
                         `<div class="row">
-                            <div class="tableItem">
+                            <div class="actionItem">
+                            </div>
+                            <div class="tableItem tableBorderLeft tableBorderBottom">
                                 Brak Danych  
                             </div>
-                            <div class="tableItem">
+                            <div class="tableItem tableBorderBottom">
                                 Brak Danych
                             </div>
-                            <div class="tableItem">
+                            <div class="tableItem tableBorderBottom">
                                 Brak Danych
                             </div>
-                            <div class="tableItem">
+                            <div class="tableItem tableBorderBottom tableBorderRight">
                                 Brak Danych
                             </div>
                         </div>`
                         :
-                        x.invoiceFields.map(y=>`
+                        x.invoiceFields.map((y,idx)=>`
                         <div class="row">
-                            <div class="tableItemName">
+                            <div class="actionItem ${getPositionAction(x.action,y.action) === "Nie księgować"?'colorRed':''}">
+                            ${getPositionAction(x.action,y.action)}
+                            </div>
+                            <div class="tableItemName tableBorderLeft ${idx+1 == x.invoiceFields.length?'tableBorderBottom':''}">
                                 <h2>${y.name}</h2>   
                                 ${y.comment != ''?`<h3  class="positionComment">${y.comment}</   h3>`:''}
                             </div>
-                            <div class="tableItem">
+                            <div class="tableItem ${idx+1 == x.invoiceFields.length?'tableBorderBottom':''}">
                                 ${y.netAmount.toFixed(2)} ${x.currency}
                             </div>
-                            <div class="tableItem">
+                            <div class="tableItem ${idx+1 == x.invoiceFields.length?'tableBorderBottom':''}">
                                  ${y.vatAmount.toFixed(2)} ${x.currency}
                             </div>
-                            <div class="tableItem">
+                            <div class="tableItem tableBorderRight ${idx+1 == x.invoiceFields.length?'tableBorderBottom':''}">
                                 ${y.grossAmount.toFixed(2)} ${x.    currency}
                             </div>
                         </div>      
                         `
                         ).join('')}
-                    </div>
-
                 </section>
 
                 <section class="sumTable">
