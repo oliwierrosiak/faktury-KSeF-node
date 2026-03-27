@@ -109,7 +109,7 @@ function createPdfHtml(data)
                         `<div class="row">
                             <div class="actionItem">
                             </div>
-                            <div class="tableHeader tableBorderLeft tableBorderBottom">-</div>
+                            <div class="tableItem tableBorderLeft tableBorderBottom">-</div>
                             <div class="tableItem tableBorderBottom">
                                 Brak Danych  
                             </div>
