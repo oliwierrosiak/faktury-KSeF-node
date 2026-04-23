@@ -5,8 +5,9 @@ async function transformXMLToJSON(xml)
 {
     const obj = await xml2js.parseStringPromise(xml,{
         explicitArray: true,
-        tagNameProcessors:[name => name.replace(/^ns\d*:/, '')]
+        tagNameProcessors:[name => name.replace(/^[^:]+:/, '')]
     })
+
     const payment = obj.Faktura.Fa[0].Platnosc[0]
 
     let paymentForm = 'Brak danych'
@@ -57,10 +58,6 @@ async function transformXMLToJSON(xml)
     const rows = obj.Faktura.Fa[0].FaWiersz
 
     const sellDate = obj.Faktura.Fa[0].P_6?.[0] ? obj.Faktura.Fa[0].P_6[0] : (obj.Faktura.Fa[0].P_1?.[0] ? obj.Faktura.Fa[0].P_1[0] : null)
-
-    // console.log(obj.Faktura.Fa[0].P_6)
-    // console.log(obj.Faktura.Fa[0].P_1)
-    // console.log(sellDate)
 
     const necessaryFields = rows.map(x=>{
         return{
